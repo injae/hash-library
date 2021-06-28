@@ -4,9 +4,9 @@
 // see http://create.stephan-brumme.com/disclaimer.html
 //
 
-#include "crc32.h"
+#include "hash_lib/crc32.h"
 
-#include "endian_include.h"
+#include "hash_lib/endian_include.h"
 
 
 namespace hash

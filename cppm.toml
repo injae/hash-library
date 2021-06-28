@@ -1,0 +1,14 @@
+[package]
+   name = "hash-lib"
+   version = "0.8.0"
+   description = "Portable C++ Hashing Library"
+
+
+[lib]
+   name = "hash-lib"
+   type = "static"
+   source = ["src/crc32.cpp", "src/keccak.cpp", "src/md5.cpp", "src/sha1.cpp", "src/sha256.cpp", "src/sha3.cpp"]
+
+#[[bin]]
+#    name = "digest"
+#    source = ["src/digest.cpp"]

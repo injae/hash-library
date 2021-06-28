@@ -1,7 +1,7 @@
 // minimal test case for https://github.com/stbrumme/hash-library/issues/6
 // g++ github-issue6.cpp ../sha3.cpp -o github-issue6 && ./github-issue6
 
-#include "../sha3.h"
+#include "hash_lib/sha3.h"
 #include <iostream>
 
 int main(int argc, char *argv[])

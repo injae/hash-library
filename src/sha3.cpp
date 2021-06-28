@@ -4,9 +4,9 @@
 // see http://create.stephan-brumme.com/disclaimer.html
 //
 
-#include "sha3.h"
+#include "hash_lib/sha3.h"
 
-#include "endian_include.h"
+#include "hash_lib/endian_include.h"
 
 #include <iostream>
 

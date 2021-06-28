@@ -1,11 +1,11 @@
 // minimal test case for https://github.com/stbrumme/hash-library/issues/2
 // g++ github-issue2.cpp ../sha*.cpp ../keccak.cpp ../md5.cpp -o github-issue2 && ./github-issue2
 
-#include "../sha1.h"
-#include "../sha256.h"
-#include "../sha3.h"
-#include "../keccak.h"
-#include "../md5.h"
+#include "hash_lib/sha1.h"
+#include "hash_lib/sha256.h"
+#include "hash_lib/sha3.h"
+#include "hash_lib/keccak.h"
+#include "hash_lib/md5.h"
 #include <iostream>
 
 int main()

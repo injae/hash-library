@@ -4,9 +4,9 @@
 // see http://create.stephan-brumme.com/disclaimer.html
 //
 
-#include "keccak.h"
+#include "hash_lib//keccak.h"
 
-#include "endian_include.h"
+#include "hash_lib/endian_include.h"
 
 namespace hash
 {
