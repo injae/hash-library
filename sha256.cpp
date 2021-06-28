@@ -6,14 +6,13 @@
 
 #include "sha256.h"
 
-// big endian architectures need #define __BYTE_ORDER __BIG_ENDIAN
-#ifndef _MSC_VER
-#include <endian.h>
-#endif
+#include "endian_include.h"
 
 //#define SHA2_224_SEED_VECTOR
 
 
+namespace hash
+{
 /// same as reset()
 SHA256::SHA256()
 {
@@ -61,6 +60,8 @@ namespace
     return (a >> c) | (a << (32 - c));
   }
 
+#if defined(__BYTE_ORDER) && (__BYTE_ORDER != 0) && (__BYTE_ORDER == __BIG_ENDIAN)
+#else
   inline uint32_t swap(uint32_t x)
   {
 #if defined(__GNUC__) || defined(__clang__)
@@ -75,6 +76,7 @@ namespace
           ((x <<  8) & 0x00FF0000) |
            (x << 24);
   }
+#endif
 
   // mix functions for processBlock()
   inline uint32_t f1(uint32_t e, uint32_t f, uint32_t g)
@@ -425,4 +427,5 @@ std::string SHA256::operator()(const std::string& text)
   reset();
   add(text.c_str(), text.size());
   return getHash();
+}
 }

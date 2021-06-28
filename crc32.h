@@ -38,6 +38,8 @@ typedef unsigned __int32 uint32_t;
     http://create.stephan-brumme.com/crc32/
     Its unrolled version is about twice as fast but its look-up table doubled in size as well.
   */
+namespace hash
+{
 class CRC32 //: public Hash
 {
 public:
@@ -67,3 +69,4 @@ private:
   /// hash
   uint32_t m_hash;
 };
+}

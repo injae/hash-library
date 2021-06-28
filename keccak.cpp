@@ -6,12 +6,10 @@
 
 #include "keccak.h"
 
-// big endian architectures need #define __BYTE_ORDER __BIG_ENDIAN
-#ifndef _MSC_VER
-#include <endian.h>
-#endif
+#include "endian_include.h"
 
-
+namespace hash
+{
 /// same as reset()
 Keccak::Keccak(Bits bits)
 : m_blockSize(200 - 2 * (bits / 8)),
@@ -54,6 +52,7 @@ namespace
     return (x << numBits) | (x >> (64 - numBits));
   }
 
+#if defined(__BYTE_ORDER) && (__BYTE_ORDER != 0) && (__BYTE_ORDER == __BIG_ENDIAN)
   /// convert litte vs big endian
   inline uint64_t swap(uint64_t x)
   {
@@ -73,6 +72,7 @@ namespace
            ((x << 40) & 0x00FF000000000000ULL) |
             (x << 56);
   }
+#endif
 
 
   /// return x % 5 for 0 <= x <= 9
@@ -152,14 +152,14 @@ void Keccak::processBlock(const void* data)
     for (unsigned int j = 0; j < StateSize; j += 5)
     {
       // temporaries
-      uint64_t one = m_hash[j];
+      uint64_t one_b = m_hash[j];
       uint64_t two = m_hash[j + 1];
 
       m_hash[j]     ^= m_hash[j + 2] & ~two;
       m_hash[j + 1] ^= m_hash[j + 3] & ~m_hash[j + 2];
       m_hash[j + 2] ^= m_hash[j + 4] & ~m_hash[j + 3];
-      m_hash[j + 3] ^=      one      & ~m_hash[j + 4];
-      m_hash[j + 4] ^=      two      & ~one;
+      m_hash[j + 3] ^=      one_b    & ~m_hash[j + 4];
+      m_hash[j + 4] ^=      two      & ~one_b;
     }
 
     // Iota
@@ -295,4 +295,5 @@ std::string Keccak::operator()(const std::string& text)
   reset();
   add(text.c_str(), text.size());
   return getHash();
+}
 }

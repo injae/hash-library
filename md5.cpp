@@ -6,11 +6,11 @@
 
 #include "md5.h"
 
-#ifndef _MSC_VER
-#include <endian.h>
-#endif
+#include "endian_include.h"
 
 
+namespace hash
+{
 /// same as reset()
 MD5::MD5()
 {
@@ -377,4 +377,5 @@ std::string MD5::operator()(const std::string& text)
   reset();
   add(text.c_str(), text.size());
   return getHash();
+}
 }

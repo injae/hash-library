@@ -16,6 +16,8 @@
 #include <iostream>
 #include <fstream>
 
+namespace hash
+{
 int main(int argc, char** argv)
 {
   // syntax check
@@ -106,4 +108,5 @@ int main(int argc, char** argv)
     std::cout << "SHA3/256:   " << digestSha3  .getHash() << std::endl;
 
   return 0;
+}
 }

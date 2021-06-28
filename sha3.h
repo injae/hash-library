@@ -33,6 +33,8 @@ typedef unsigned __int64 uint64_t;
       sha3.add(pointer to fresh data, number of new bytes);
     std::string myHash3 = sha3.getHash();
   */
+namespace hash
+{
 class SHA3 //: public Hash
 {
 public:
@@ -79,3 +81,4 @@ private:
   /// variant
   Bits     m_bits;
 };
+}

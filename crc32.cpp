@@ -6,12 +6,11 @@
 
 #include "crc32.h"
 
-// big endian architectures need #define __BYTE_ORDER __BIG_ENDIAN
-#ifndef _MSC_VER
-#include <endian.h>
-#endif
+#include "endian_include.h"
 
 
+namespace hash
+{
 /// same as reset()
 CRC32::CRC32()
 {
@@ -318,6 +317,7 @@ namespace
       0x2C8E0FFF,0xE0240F61,0x6EAB0882,0xA201081C,0xA8C40105,0x646E019B,0xEAE10678,0x264B06E6 }
   };
 
+#if defined(__BYTE_ORDER) && (__BYTE_ORDER != 0) && (__BYTE_ORDER == __BIG_ENDIAN)
   inline uint32_t swap(uint32_t x)
   {
 #if defined(__GNUC__) || defined(__clang__)
@@ -332,6 +332,7 @@ namespace
           ((x <<  8) & 0x00FF0000) |
            (x << 24);
   }
+#endif
 }
 
 
@@ -428,4 +429,5 @@ std::string CRC32::operator()(const std::string& text)
   reset();
   add(text.c_str(), text.size());
   return getHash();
+}
 }

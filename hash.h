@@ -8,6 +8,8 @@
 
 #include <string>
 
+namespace hash
+{
 /// abstract base class
 class Hash
 {
@@ -26,3 +28,4 @@ public:
   /// restart
   virtual void reset() = 0;
 };
+}

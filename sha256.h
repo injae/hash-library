@@ -34,6 +34,8 @@ typedef unsigned __int64 uint64_t;
       sha256.add(pointer to fresh data, number of new bytes);
     std::string myHash3 = sha256.getHash();
   */
+namespace hash
+{
 class SHA256 //: public Hash
 {
 public:
@@ -76,3 +78,4 @@ private:
   /// hash, stored as integers
   uint32_t m_hash[HashValues];
 };
+}
